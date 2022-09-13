@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/python3
 
 
@@ -15,3 +16,8 @@ print (c)
 
 
 
+=======
+#!/usr/bin/env python3
+
+# 
+>>>>>>> 577eadf0c66b9a3fe06c2bb5f53ce771d4741343
