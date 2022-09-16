@@ -53,13 +53,13 @@ function install_with_conda {
 # Install all required libraries t
 function install_with_pip {
   # Upgrade pip
-  python3 -m pip install --upgrade pip
+  python -m pip install --upgrade pip
 
   # Install setuptools
-  python3 -m pip install setuptools
-  python3 -m pip install --no-cache-dir -r install/pip/requirements.txt
+  python -m pip install setuptools
+  python -m pip install --no-cache-dir -r install/pip/requirements.txt
 
 }
 
-install_with_conda
+#install_with_conda
 install_with_pip 
