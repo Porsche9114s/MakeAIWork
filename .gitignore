@@ -15,5 +15,5 @@ etc/
 share/
 .DS_Store
 env/
-simulations/
 log.txt
+simulations/car/control_client/default.samples
