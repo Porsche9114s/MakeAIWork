@@ -21,8 +21,6 @@ model fit.
 
 tensorflow.org/tutorials/keras/classification
 
-
-
 '''
 # TensorFlow and tf.keras
 import tensorflow as tf
@@ -38,6 +36,7 @@ import numpy as np
 
 dataset = pd.read_csv('C:/Users/vande/MakeAIWork/simulations/car/control_client/sonar.csv')
 
+#let op; zijn het values of columns
 values = list(dataset.columns.values)
 
 y = dataset[values[0:3]]
@@ -61,6 +60,7 @@ model = tf.keras.Sequential([
 
 
 #model afstellen
+#let op learningrate. Standaard op 0.001
 model.compile(optimizer='adam',
 loss=tf.keras.losses.MeanSquaredError(),
 metrics=['accuracy'])
@@ -68,11 +68,17 @@ metrics=['accuracy'])
 
 
 #model trainen
-model.fit(y, x, epochs=1000)
+model.fit(y, x, epochs=250)
 
+
+#weergeven resultaten.
 test_loss, test_acc = model.evaluate(y, x, verbose=2)
 
-print('\nTest accuracy:', test_acc)
+#print('\nTest accuracy:', test_acc)
 
+#probability_model = tf.keras.Sequential([model, 
+#tf.keras.layers.Softmax()])
 
-
+predictions = model.predict(y)
+#np.argmax(predictions[0])
+print(predictions)
