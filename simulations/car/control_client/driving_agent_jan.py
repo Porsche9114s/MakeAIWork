@@ -1,3 +1,29 @@
+'''
+====== Legal notices
+
+Copyright (C) 2013 - 2021 GEATEC engineering
+
+This program is free software.
+You can use, redistribute and/or modify it, but only under the terms stated in the QQuickLicense.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY, without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the QQuickLicense for details.
+
+The QQuickLicense can be accessed at: http://www.qquick.org/license.html
+
+__________________________________________________________________________
+
+
+ THIS PROGRAM IS FUNDAMENTALLY UNSUITABLE FOR CONTROLLING REAL SYSTEMS !!
+
+__________________________________________________________________________
+
+It is meant for training purposes only.
+
+Removing this header ends your license.
+'''
 
 import time as tm
 import traceback as tb
@@ -5,14 +31,21 @@ import math as mt
 import sys as ss
 import os
 import socket as sc
+import tensorflow as tf
+import numpy as np
 
 ss.path +=  [os.path.abspath (relPath) for relPath in  ('..',)] 
 
 import socket_wrapper as sw
 import parameters as pm
 
-class HardcodedClient:
+model_sonar_path = r'C:/Users/vande/MakeAIWork/simulations/car/control_client/sonar_test'
+# model_lidar_path = r'C:/Users/vande/makeaiwork/simulations/car/control_client/lidar_test'
+
+
+class DrivingAgent:
     def __init__ (self):
+        self.model = None
         self.steeringAngle = 0
 
         with open (pm.sampleFileName, 'w') as self.sampleFile:
@@ -38,8 +71,12 @@ class HardcodedClient:
             
         if 'lidarDistances' in sensors:
             self.lidarDistances = sensors ['lidarDistances']
+            if self .model==None:
+                self.model = tf.keras.models.load_model(model_lidar_path)
         else:
             self.sonarDistances = sensors ['sonarDistances']
+            if self.model == None:
+                self.model = tf.keras.models.load_model(model_sonar_path)
 
     def lidarSweep (self):
         nearestObstacleDistance = pm.finity
@@ -68,29 +105,13 @@ class HardcodedClient:
         self.targetVelocity = pm.getTargetVelocity (self.steeringAngle)
 
     def sonarSweep (self):
-        obstacleDistances = [pm.finity for sectorIndex in range (3)]
-        obstacleAngles = [0 for sectorIndex in range (3)]
-        
-        for sectorIndex in (-1, 0, 1):
-            sonarDistance = self.sonarDistances [sectorIndex]
-            sonarAngle = 2 * self.halfMiddleApertureAngle * sectorIndex
-            
-            if sonarDistance < obstacleDistances [sectorIndex]:
-                obstacleDistances [sectorIndex] = sonarDistance
-                obstacleAngles [sectorIndex] = sonarAngle
 
-        if obstacleDistances [-1] > obstacleDistances [0]:
-            leftIndex = -1
-        else:
-            leftIndex = 0
-           
-        if obstacleDistances [1] > obstacleDistances [0]:
-            rightIndex = 1
-        else:
-            rightIndex = 0
-           
-        self.steeringAngle = (obstacleAngles [leftIndex] + obstacleAngles [rightIndex]) / 2
+        steering_angle_model = self.model.predict(np.array([self.sonarDistances])) #stuurhoek
+        self.steeringAngle = float(steering_angle_model[0][0])
         self.targetVelocity = pm.getTargetVelocity (self.steeringAngle)
+
+        # for sectorIndex in (-1, 0, 1):
+  
 
     def sweep (self):
         if hasattr (self, 'lidarDistances'):
@@ -131,5 +152,4 @@ class HardcodedClient:
         else:
             self.logSonarTraining ()
 
-HardcodedClient ()
- 
+DrivingAgent ()
