@@ -15,4 +15,4 @@ numpyarray = np.array(dataframe)
 
 for x in numpyarray:
     print (x[0].split(',') [0] + " | " + x[0].split(',')[1] + " | " + x[0].split(',')[2])
-    
+     
