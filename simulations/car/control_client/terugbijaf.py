@@ -35,8 +35,8 @@ val_arr_steering = np.array(arr_steering[0:299])
 #print(np.shape(y))
 
 # Validation data 0 - 299
-#val_arr_distances = np.array(y[0:299])
-#val_arr_steering = np.array(x[0:299])
+#val_arr_distances = np.array([0:299])
+#val_arr_steering = np.array([0:299])
 
 #neural network
 #tensorflow input
