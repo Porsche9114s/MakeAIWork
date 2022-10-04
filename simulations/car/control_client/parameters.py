@@ -34,3 +34,4 @@ sampleFileName = 'default.samples'
 
 def getTargetVelocity (steeringAngle):
     return (90 - abs (steeringAngle)) / 60
+    # ABS - word + en plus blijft +  (sturen dus snelheid omlaag)

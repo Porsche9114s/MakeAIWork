@@ -24,10 +24,7 @@ It is meant for training purposes only.
 
 Removing this header ends your license.
 '''
-
 import time as tm
-import traceback as tb
-import math as mt
 import sys as ss
 import os
 import socket as sc
@@ -35,13 +32,13 @@ import tensorflow as tf
 import numpy as np
 
 ss.path +=  [os.path.abspath (relPath) for relPath in  ('..',)] 
-
+# te maken metlist comprehension(korte manier om een for loop in te zetten naar een list)
+# Path variabele (hij zoekt in de juiste paden)
 import socket_wrapper as sw
 import parameters as pm
 
 model_sonar_path = r'C:/Users/vande/MakeAIWork/simulations/car/control_client/sonar_test'
 model_lidar_path = r'C:/Users/vande/makeaiwork/simulations/car/control_client/lidar_test'
-
 
 class DrivingAgent:
     def __init__ (self):
@@ -112,7 +109,6 @@ class DrivingAgent:
 
         # for sectorIndex in (-1, 0, 1):
   
-
     def sweep (self):
         if hasattr (self, 'lidarDistances'):
             self.lidarSweep ()
