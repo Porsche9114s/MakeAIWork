@@ -37,9 +37,10 @@ ss.path +=  [os.path.abspath (relPath) for relPath in  ('..',)]
 import socket_wrapper as sw
 import parameters as pm
 
-model_sonar_path = r'C:/Users/vande/MakeAIWork/simulations/car/control_client/sonar_test'
-model_lidar_path = r'C:/Users/vande/makeaiwork/simulations/car/control_client/lidar_test'
-
+#model_sonar_path = r'C:/Users/vande/MakeAIWork/simulations/car/control_client/sonar_test'
+model_sonar_path = './simulations/car/control_client/sonar_test'
+model_lidar_path = './simulations/car/control_client/lidar_test'
+#model_lidar_path = r'C:/Users/vande/makeaiwork/simulations/car/control_client/lidar_test'
 
 class DrivingAgent:
     def __init__ (self):
