@@ -2,6 +2,8 @@ from tensorflow import keras
 import numpy as np
 import pandas as pd
 #Trainingset laden
+
+
 #dataframe = pd.read_csv('C:/Users/vande/makeaiwork/simulations/car/control_client/sonar.samples',  header = None, sep = ' ')
 dataframe = pd.read_csv('./simulations/car/control_client/sonar.samples',  header = None, sep = ' ')
 #dataframe omzetten
